@@ -67,3 +67,9 @@ AuthIdleTimeout 480
 
 sudo echo "nodogsplash
 iptables-restore < /etc/iptables.ipv4.nat" >> /etc/rc.local
+
+
+
+#CI/CD setup
+
+chmod +x update.sh
