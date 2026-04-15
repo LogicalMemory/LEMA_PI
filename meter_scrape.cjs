@@ -14,7 +14,6 @@
  */
 
 const fs = require("fs");
-const os = require("os");
 const path = require("path");
 const { chromium } = require("playwright");
 
@@ -30,7 +29,7 @@ const STARTS = [
   "/web/resources/waveforms.html"
 ];
 
-const USER_INFO_FILE = process.argv[2] || path.join(__dirname, "..", "pi", "last_otp_response.json");
+const USER_INFO_FILE = process.argv[2] || "last_otp_response.json";
 const LOOP_INTERVAL_MS = 60 * 1000; // wait 60 s between runs
 
 function getUserIdFromFile(filePath) {
