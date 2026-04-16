@@ -1,2 +1,2 @@
 git reset --hard HEAD
-git pull origin main
+git -C /home/servers/projects/LEMA_PI pull origin main
