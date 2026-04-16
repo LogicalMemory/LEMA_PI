@@ -234,6 +234,7 @@ async function scrapeMeterSystem(target, userId, runIndex) {
       } catch {}
     }
     try {
+      console.error(`doing request for Vln avg...`);
         const apiRes = await ctx.request.post(
           `http://${target.host}/api/registerValues/getRegisterValues`,
           { data: { names: ["Vln avg"] } }
