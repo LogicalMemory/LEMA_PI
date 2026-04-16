@@ -182,6 +182,28 @@ async function scrapeMeterSystem(target, userId, runIndex) {
     }
   }
 
+   // If a form-login appears, fill it
+    const userSel = await page.$('input[type="text"], input[name*="user" i], input[name*="login" i]');
+    const passSel = await page.$('input[type="password"], input[name*="pass" i]');
+    if (userSel && passSel) {
+      try {
+        await userSel.fill(target.username);
+        await passSel.fill(target.password);
+        const submit = await page.$('button[type="submit"], input[type="submit"]');
+        if (submit) {
+          await Promise.all([
+            page.waitForLoadState("networkidle", { timeout: 15000 }),
+            submit.click()
+          ]);
+        } else {
+          await Promise.all([
+            page.waitForLoadState("networkidle", { timeout: 15000 }),
+            passSel.press("Enter")
+          ]);
+        }
+      } catch {}
+    }
+
   // Visit each start page, try to log in if needed, trigger loads
   for (const pathStart of STARTS) {
     const capturedAtStart = captured.length;
