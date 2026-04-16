@@ -188,6 +188,7 @@ async function scrapeMeterSystem(target, userId, runIndex) {
     const url = `http://${target.host}${pathStart}`;
     console.error(`Navigating: ${url}`);
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    console.error(`Page loaded`);
 
     // If a form-login appears, fill it
     const userSel = await page.$('input[type="text"], input[name*="user" i], input[name*="login" i]');

@@ -1,3 +1,4 @@
+# Setup the captive portal
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y network-manager
 
@@ -14,13 +15,19 @@ sudo nmcli connection modify <hotspot UUID> connection.autoconnect yes connectio
 
 sudo apt install python3-flask -y
 
+# Setup the scraper service
+
+chmod -R +x /home/servers/projects/LEMA_PI
+npm i playwright
+npx playwright install chromium
+
 "[Unit]
 Description=Lema Scraper Service
 After=network.target
 
 [Service]
-WorkingDirectory=/home/servers/projects/LEMA/pi
-ExecStart=/usr/bin/python3 /home/servers/projects/LEMA/pi/app.py
+WorkingDirectory=/home/servers/projects/LEMA_PI
+ExecStart=/usr/bin/python3 /home/servers/projects/LEMA_PI/app.py
 Restart=always
 
 [Install]
