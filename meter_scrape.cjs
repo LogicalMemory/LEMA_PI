@@ -143,6 +143,12 @@ async function scrapeMeterSystem(target, userId, runIndex) {
   });
   const page = await ctx.newPage();
 
+  await page.goto('https://youtube.com');
+  await sleep(10000);
+  await page.goto('https://google.com');
+  console.log("Passed this!");
+
+
   const captured = [];
   page.on("response", async (res) => {
     try {
