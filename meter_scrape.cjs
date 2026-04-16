@@ -139,12 +139,24 @@ async function scrapeMeterSystem(target, userId, runIndex) {
   const ctx = await browser.newContext({
     ignoreHTTPSErrors: true,
     // Try HTTP Basic first; page may still present a form login, which we handle.
-    httpCredentials: { username: target.username, password: target.password }
+    httpCredentials: { username: target.username, password: target.password },
+    device_scale_factor: 1,
+    is_mobile: true,
+    viewport: { width: 375, height: 667 }
   });
   const page = await ctx.newPage();
 
-  await page.goto('https://youtube.com');
-  await sleep(10000);
+  const handler = (route, request) => {
+    // Don't satisfy requests for these resources.
+    if (["font", "image", "media"].includes(request.resourceType())) {
+      route.abort();
+    } else {
+      route.continue();
+    }
+  };
+
+  page.route("**/*", handler)
+
   await page.goto('https://google.com');
   console.log("Passed this!");
 
