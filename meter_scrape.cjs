@@ -9,13 +9,13 @@
  * Usage:
  *   npm init -y
  *   npm i playwright
- *   npx playwright install chromium
+ *   npx playwright install webkit
  *   node dump_meter_api.cjs
  */
 
 const fs = require("fs");
 const path = require("path");
-const { chromium } = require("playwright");
+const { webkit } = require("playwright");
 
 const HOST = "192.168.0.135";
 const STARTS = [
@@ -135,7 +135,7 @@ async function fetchMeterSystems(userId) {
 async function scrapeMeterSystem(target, userId, runIndex) {
   console.error(`\n--- Run #${runIndex} / meter_system_id=${target.meterSystemId} / host=${target.host} ---`);
 
-  const browser = await chromium.launch({ headless: true });
+  const browser = await webkit.launch({ headless: true });
   const ctx = await browser.newContext({
     ignoreHTTPSErrors: true,
     // Try HTTP Basic first; page may still present a form login, which we handle.

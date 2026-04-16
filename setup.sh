@@ -17,9 +17,9 @@ sudo apt install python3-flask -y
 
 # Setup the scraper service
 
-chmod -R +x /home/servers/projects/LEMA_PI
+sudo chmod -R +x /home/servers/projects/LEMA_PI
 npm i playwright
-npx playwright install chromium
+npx playwright install webkit
 
 "[Unit]
 Description=Lema Scraper Service
