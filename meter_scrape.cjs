@@ -19,14 +19,7 @@ const { webkit } = require("playwright");
 
 const HOST = "192.168.0.135";
 const STARTS = [
-  "/web/resources/monitoring.html",
-  "/web/resources/instReadings.html",
-  "/web/resources/trendingAndForecasting.html",
-  "/web/resources/ieee519.html",
-  "/web/resources/ieee519Summary.html",
-  "/web/resources/powerQualitySummary.html",
-  "/web/resources/inputsOutputs.html",
-  "/web/resources/waveforms.html"
+  "/web/resources/instReadings.html"
 ];
 
 const USER_INFO_FILE = process.argv[2] || "last_otp_response.json";
@@ -156,10 +149,6 @@ async function scrapeMeterSystem(target, userId, runIndex) {
   };
 
   page.route("**/*", handler)
-
-  await page.goto('https://google.com');
-  console.log("Passed this!");
-
 
   const captured = [];
   page.on("response", async (res) => {
